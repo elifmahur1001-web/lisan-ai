@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b120f" />
+  <meta name="description" content="Lisan AI - Askerî ortama uygun, yapay zekâ destekli Arapça öğrenme ve iletişim destek uygulaması." />
+  <title>Lisan AI — Operasyonel Arapça Eğitim Sistemi</title>
+  <style>
+    :root{
+      --bg:#08100c;
+      --bg2:#0d1711;
+      --panel:#111d16;
+      --panel2:#17261d;
+      --line:#2a3d31;
+      --text:#eef5ef;
+      --muted:#9eb1a3;
+      --olive:#7b8f53;
+      --olive2:#a4b873;
+      --sand:#c8b78d;
+      --danger:#c85c5c;
+      --warn:#d6a84b;
+      --ok:#4fa36d;
+      --blue:#5e8ca8;
+      --shadow:0 20px 60px rgba(0,0,0,.42);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; min-height:100vh; color:var(--text);
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        linear-gradient(rgba(8,16,12,.94),rgba(8,16,12,.98)),
+        repeating-linear-gradient(45deg,rgba(255,255,255,.015) 0 1px,transparent 1px 9px),
+        radial-gradient(circle at 15% 0%,rgba(123,143,83,.18),transparent 34%),
+        radial-gradient(circle at 100% 15%,rgba(94,140,168,.13),transparent 34%),
+        var(--bg);
+    }
+    body.light{
+      --bg:#edf1e9;--bg2:#e4e9df;--panel:#f7faf5;--panel2:#eef3eb;
+      --line:#cdd7ca;--text:#172019;--muted:#637064;--shadow:0 18px 48px rgba(33,45,35,.14);
+    }
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    .hidden{display:none!important}
+    .screen{min-height:100vh}
+    .auth-screen{
+      display:grid;place-items:center;padding:24px;
+      background:
+        linear-gradient(rgba(7,14,10,.76),rgba(7,14,10,.9)),
+        radial-gradient(circle at 30% 20%,rgba(123,143,83,.18),transparent 30%);
+    }
+    .auth-shell{width:min(1050px,100%);display:grid;grid-template-columns:1.05fr .95fr;border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:rgba(13,23,17,.92)}
+    .auth-brand{padding:48px;position:relative;overflow:hidden;background:linear-gradient(160deg,#132017,#0b120e)}
+    .auth-brand:after{content:"لسان";position:absolute;right:-10px;bottom:-40px;font:900 160px serif;color:rgba(255,255,255,.035);direction:rtl}
+    .seal{width:78px;height:78px;border:2px solid var(--olive2);border-radius:50%;display:grid;place-items:center;font-size:34px;color:var(--sand);box-shadow:0 0 0 8px rgba(123,143,83,.08)}
+    .auth-brand h1{margin:28px 0 8px;font-size:42px;letter-spacing:.04em}
+    .auth-brand h1 span{color:var(--olive2)}
+    .auth-brand p{color:#b9c6bc;line-height:1.7;max-width:560px}
+    .feature-list{display:grid;gap:12px;margin-top:28px}
+    .feature-item{display:flex;gap:12px;align-items:flex-start;padding:13px 14px;border:1px solid rgba(255,255,255,.07);border-radius:14px;background:rgba(255,255,255,.025)}
+    .feature-item b{display:block}.feature-item small{color:#9fb0a3}
+    .auth-panel{padding:38px;background:linear-gradient(180deg,var(--panel),var(--bg2))}
+    .auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:rgba(255,255,255,.03);padding:6px;border-radius:14px;margin-bottom:22px}
+    .auth-tabs button{border:0;background:transparent;color:var(--muted);padding:12px;border-radius:10px;font-weight:800}
+    .auth-tabs button.active{background:var(--olive);color:#0b120d}
+    .field{display:grid;gap:7px;margin-bottom:14px}
+    .field label{font-size:12px;color:var(--muted);font-weight:800;letter-spacing:.04em}
+    .input,textarea,select{
+      width:100%;border:1px solid var(--line);background:var(--bg);color:var(--text);
+      border-radius:13px;padding:13px 14px;outline:none;
+    }
+    .input:focus,textarea:focus,select:focus{border-color:var(--olive2);box-shadow:0 0 0 3px rgba(164,184,115,.12)}
+    .btn{
+      border:1px solid var(--line);background:var(--panel2);color:var(--text);
+      border-radius:13px;padding:12px 15px;font-weight:850;
+    }
+    .btn.primary{border:0;background:linear-gradient(135deg,var(--olive2),var(--olive));color:#0c130e}
+    .btn.danger{background:rgba(200,92,92,.12);border-color:rgba(200,92,92,.28);color:#ffcaca}
+    .btn.full{width:100%}
+    .auth-note{margin-top:14px;color:var(--muted);font-size:12px;line-height:1.55}
+    .app{max-width:1500px;margin:auto;padding:14px}
+    .topbar{
+      position:sticky;top:8px;z-index:30;display:flex;justify-content:space-between;align-items:center;gap:12px;
+      padding:13px 15px;border:1px solid var(--line);border-radius:18px;background:rgba(13,23,17,.88);backdrop-filter:blur(14px);box-shadow:var(--shadow)
+    }
+    .brand{display:flex;gap:11px;align-items:center;min-width:0}
+    .logo{width:45px;height:45px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--olive2),var(--olive));color:#0b120d;font-weight:1000}
+    .brand h2{margin:0;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand p{margin:2px 0 0;font-size:11px;color:var(--muted)}
+    .top-actions{display:flex;gap:8px;align-items:center}
+    .status{padding:8px 10px;border-radius:999px;border:1px solid rgba(79,163,109,.28);background:rgba(79,163,109,.09);color:#9ce4b2;font-size:11px;font-weight:850}
+    .layout{display:grid;grid-template-columns:250px 1fr;gap:14px;margin-top:14px}
+    .sidebar{border:1px solid var(--line);border-radius:18px;background:rgba(17,29,22,.9);padding:13px;height:calc(100vh - 102px);position:sticky;top:88px}
+    .user-card{padding:13px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025);margin-bottom:12px}
+    .user-card strong{display:block}.user-card small{color:var(--muted)}
+    .nav{display:grid;gap:7px}
+    .nav button{display:flex;gap:10px;align-items:center;text-align:left;border:1px solid transparent;background:transparent;color:var(--muted);padding:11px 12px;border-radius:12px;font-weight:800}
+    .nav button.active{background:rgba(123,143,83,.16);border-color:rgba(164,184,115,.25);color:var(--text)}
+    .content{min-width:0}
+    .section{display:none}.section.active{display:block}
+    .hero,.card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(23,38,29,.92),rgba(13,23,17,.92));border-radius:18px;box-shadow:var(--shadow)}
+    .hero{padding:24px;display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+    .eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--olive2);font-weight:900}
+    .hero h1{font-size:clamp(28px,4vw,50px);line-height:1.04;margin:10px 0 12px}
+    .hero p{color:var(--muted);line-height:1.6;max-width:780px}
+    .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .metric{padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}
+    .metric span{display:block;color:var(--muted);font-size:11px}.metric strong{font-size:22px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:14px}
+    .card{padding:18px}.span-12{grid-column:span 12}.span-8{grid-column:span 8}.span-7{grid-column:span 7}.span-6{grid-column:span 6}.span-5{grid-column:span 5}.span-4{grid-column:span 4}
+    .card h3{margin:0 0 5px}.sub{margin:0 0 14px;color:var(--muted);font-size:13px;line-height:1.5}
+    .row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+    .result{margin-top:14px;padding:17px;border:1px solid rgba(164,184,115,.22);border-radius:15px;background:linear-gradient(135deg,rgba(123,143,83,.11),rgba(94,140,168,.06))}
+    .arabic{font-family:"Noto Naskh Arabic","Geeza Pro",Tahoma,serif;font-size:34px;line-height:1.7;text-align:right;direction:rtl}
+    .translit{color:#a7c4d4;font-weight:800}.meaning{color:#d8e1da;margin-top:6px}.note{color:var(--muted);font-size:12px;margin-top:8px}
+    .chips{display:flex;gap:7px;flex-wrap:wrap}
+    .chip{border:1px solid var(--line);background:rgba(255,255,255,.025);color:var(--text);border-radius:999px;padding:8px 10px;font-size:11px;font-weight:800}
+    .list{display:grid;gap:9px}
+    .item{padding:13px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02)}
+    .item-head{display:flex;justify-content:space-between;gap:10px}.item small{color:var(--muted)}
+    .phrase{display:grid;grid-template-columns:1fr 1.2fr auto;gap:12px;align-items:center;padding:13px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02)}
+    .phrase .ar{font-size:22px;direction:rtl;text-align:right;font-family:"Noto Naskh Arabic","Geeza Pro",serif}
+    .badge{display:inline-block;padding:5px 8px;border-radius:999px;background:rgba(123,143,83,.15);color:#c7d5a3;font-size:10px;font-weight:900}
+    .progress{height:8px;background:rgba(255,255,255,.06);border-radius:999px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--olive),var(--olive2))}
+    .quiz-option{display:block;width:100%;text-align:left;margin-top:9px;padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025);color:var(--text)}
+    .quiz-option.correct{border-color:rgba(79,163,109,.6);background:rgba(79,163,109,.12)}.quiz-option.wrong{border-color:rgba(200,92,92,.6);background:rgba(200,92,92,.12)}
+    .toast{position:fixed;right:16px;bottom:16px;z-index:100;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:var(--shadow);display:none}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:grid;place-items:center;padding:18px;z-index:80}
+    .modal-card{width:min(620px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+    .offline-tag{color:#f1d792;background:rgba(214,168,75,.1);border:1px solid rgba(214,168,75,.25);padding:6px 9px;border-radius:999px;font-size:10px;font-weight:900}
+    .footer{text-align:center;color:var(--muted);font-size:11px;padding:22px}
+    @media(max-width:1000px){.auth-shell{grid-template-columns:1fr}.auth-brand{display:none}.layout{grid-template-columns:1fr}.sidebar{position:static;height:auto}.nav{grid-template-columns:repeat(4,1fr)}.nav button{justify-content:center;font-size:0}.nav button span{font-size:18px}.hero{grid-template-columns:1fr}.span-8,.span-7,.span-6,.span-5,.span-4{grid-column:span 12}}
+    @media(max-width:640px){.app{padding:8px}.brand p,.status{display:none}.top-actions .btn{padding:9px}.nav{grid-template-columns:repeat(3,1fr)}.phrase{grid-template-columns:1fr auto}.phrase .ar{grid-column:1/2}.hero{padding:18px}.card{padding:15px}}
+  </style>
+</head>
+<body>
+  <section id="authScreen" class="screen auth-screen">
+    <div class="auth-shell">
+      <div class="auth-brand">
+        <div class="seal">ل</div>
+        <h1>LİSAN <span>AI</span></h1>
+        <p>Askerî ortama uygun, güvenli tasarımlı, Arapça eğitim ve iletişim destek sistemi. Standart Arapça, günlük konuşma, lehçeler, telaffuz, görev senaryoları ve çevrimdışı ifade bankası.</p>
+        <div class="feature-list">
+          <div class="feature-item"><span>🛡️</span><div><b>Yerel kullanım odaklı</b><small>Temel eğitim içerikleri internet olmadan kullanılabilir.</small></div></div>
+          <div class="feature-item"><span>🎧</span><div><b>Sesli telaffuz</b><small>Arapça ifadeleri sesli dinleme ve tekrar çalışması.</small></div></div>
+          <div class="feature-item"><span>🧠</span><div><b>AI öğretmen altyapısı</b><small>Güvenli sunucu bağlandığında açıklama ve kişiselleştirilmiş dersler.</small></div></div>
+        </div>
+      </div>
+      <div class="auth-panel">
+        <div class="auth-tabs">
+          <button id="loginTab" class="active" onclick="showAuth('login')">Giriş Yap</button>
+          <button id="registerTab" onclick="showAuth('register')">Kayıt Ol</button>
+        </div>
+
+        <form id="loginForm" onsubmit="login(event)">
+          <div class="field"><label>KULLANICI ADI</label><input id="loginUser" class="input" autocomplete="username" required placeholder="kullanıcı adınız"></div>
+          <div class="field"><label>ŞİFRE</label><input id="loginPass" class="input" type="password" autocomplete="current-password" required placeholder="••••••••"></div>
+          <div class="row" style="justify-content:space-between;margin-bottom:14px">
+            <label style="font-size:12px;color:var(--muted)"><input type="checkbox" id="rememberMe"> Oturumu hatırla</label>
+            <button type="button" class="btn" onclick="openForgot()">Şifremi unuttum</button>
+          </div>
+          <button class="btn primary full">SİSTEME GİRİŞ</button>
+          <div class="auth-note">Demo hesabı: <b>personel</b> / <b>1234</b>. Gerçek kullanımda kimlik doğrulama sunucu tarafında yapılmalıdır.</div>
+        </form>
+
+        <form id="registerForm" class="hidden" onsubmit="register(event)">
+          <div class="field"><label>AD SOYAD</label><input id="regName" class="input" required placeholder="Ad Soyad"></div>
+          <div class="field"><label>KULLANICI ADI</label><input id="regUser" class="input" required placeholder="benzersiz kullanıcı adı"></div>
+          <div class="field"><label>BİRİM / ROL</label><select id="regRole"><option>Öğrenci Personel</option><option>Eğitmen</option><option>Yönetici</option></select></div>
+          <div class="field"><label>ŞİFRE</label><input id="regPass" class="input" type="password" minlength="4" required placeholder="en az 4 karakter"></div>
+          <button class="btn primary full">HESAP OLUŞTUR</button>
+          <div class="auth-note">Bu tek dosyalı sürümde kullanıcı bilgisi yalnızca cihazın tarayıcı hafızasında saklanır.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="appScreen" class="screen hidden">
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="logo">ل</div>
+          <div><h2>Lisan AI — Operasyonel Arapça Eğitim Sistemi</h2><p>İletişim ve dil eğitimi amaçlı kullanım</p></div>
+        </div>
+        <div class="top-actions">
+          <span id="connectionStatus" class="status">● YEREL MOD AKTİF</span>
+          <button class="btn" onclick="toggleTheme()">◐</button>
+          <button class="btn danger" onclick="logout()">Çıkış</button>
+        </div>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="user-card"><strong id="currentUserName">Personel</strong><small id="currentUserRole">Öğrenci Personel</small></div>
+          <nav class="nav">
+            <button class="active" data-section="dashboard"><span>⌂</span> Ana Panel</button>
+            <button data-section="translate"><span>文</span> AI Çeviri</button>
+            <button data-section="mission"><span>☷</span> Görev İfadeleri</button>
+            <button data-section="daily"><span>◉</span> Günlük Konuşma</button>
+            <button data-section="lessons"><span>▤</span> Dersler</button>
+            <button data-section="pronounce"><span>♫</span> Telaffuz</button>
+            <button data-section="quiz"><span>✓</span> Sınavlar</button>
+            <button data-section="favorites"><span>★</span> Hızlı Komutlar</button>
+            <button data-section="progress"><span>▥</span> İlerleme</button>
+            <button data-section="settings"><span>⚙</span> Ayarlar</button>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section id="dashboard" class="section active">
+            <div class="hero">
+              <div>
+                <div class="eyebrow">EĞİTİM DURUMU</div>
+                <h1>Arapça iletişimi hızlı, doğru ve disiplinli öğren.</h1>
+                <p>Modern Standart Arapça, günlük lehçeler, görev senaryoları, telaffuz ve çevrimdışı ifade bankası tek panelde.</p>
+                <div class="row"><button class="btn primary" onclick="goSection('translate')">Çeviri Merkezi</button><button class="btn" onclick="goSection('mission')">Görev İfadeleri</button></div>
+              </div>
+              <div class="metrics">
+                <div class="metric"><span>Öğrenilen kelime</span><strong id="metricWords">24</strong></div>
+                <div class="metric"><span>Tamamlanan ders</span><strong>6</strong></div>
+                <div class="metric"><span>Günlük seri</span><strong>8 gün</strong></div>
+                <div class="metric"><span>Telaffuz puanı</span><strong>%84</strong></div>
+              </div>
+            </div>
+            <div class="grid">
+              <div class="card span-8"><h3>Bugünün programı</h3><p class="sub">20 dakikalık önerilen eğitim planı.</p><div class="list">
+                <div class="item"><div class="item-head"><b>Kontrol noktası ifadeleri</b><span class="badge">8 dk</span></div><small>Kimlik kontrolü, bekleme, yönlendirme.</small></div>
+                <div class="item"><div class="item-head"><b>Telaffuz tekrarı</b><span class="badge">6 dk</span></div><small>ع، ح، ق sesleri ve örnek cümleler.</small></div>
+                <div class="item"><div class="item-head"><b>Mini sınav</b><span class="badge">6 dk</span></div><small>10 soru, A2 seviyesi.</small></div>
+              </div></div>
+              <div class="card span-4"><h3>Haftalık hedef</h3><p class="sub">Hedefin %72'si tamamlandı.</p><div class="progress"><i style="width:72%"></i></div><div class="item" style="margin-top:14px"><b>Aktif dil paketi</b><small style="display:block;margin-top:5px">Standart Arapça + Levant</small></div></div>
+            </div>
+          </section>
+
+          <section id="translate" class="section">
+            <div class="grid" style="margin-top:0">
+              <div class="card span-8"><h3>AI Destekli Çeviri Merkezi</h3><p class="sub">Türkçe cümleyi Arapça, okunuş, kullanım bağlamı ve lehçe farklarıyla gösterir.</p>
+                <div class="field"><label>ÇEVİRİ MODU</label><select id="dialectSelect"><option value="msa">Modern Standart Arapça</option><option value="levant">Şam / Levant</option><option value="egypt">Mısır</option><option value="gulf">Körfez</option></select></div>
+                <div class="field"><label>TÜRKÇE METİN</label><textarea id="translateInput" rows="6" placeholder="Örnek: Lütfen kimliğinizi gösterin."></textarea></div>
+                <div class="row"><button class="btn primary" onclick="translateNow()">ÇEVİR VE AÇIKLA</button><button class="btn" onclick="document.getElementById('translateInput').value=''">Temizle</button></div>
+                <div class="result">
+                  <div id="arabicOut" class="arabic">الرجاء إبراز هويتك</div>
+                  <div id="translitOut" class="translit">Ar-racā ibrāzu huwiyyatik</div>
+                  <div id="meaningOut" class="meaning">Lütfen kimliğinizi gösterin.</div>
+                  <div id="noteOut" class="note">Resmî ve anlaşılır kullanım.</div>
+                  <div class="row" style="margin-top:12px"><button class="btn" onclick="speak(document.getElementById('arabicOut').textContent)">🔊 Sesli Oku</button><button class="btn" onclick="saveCommand()">★ Hızlı Komutlara Ekle</button></div>
+                </div>
+              </div>
+              <div class="card span-4"><h3>Hızlı erişim</h3><div id="quickChips" class="chips"></div><hr style="border:0;border-top:1px solid var(--line);margin:16px 0"><span class="offline-tag">ÇEVRİMDIŞI PAKET HAZIR</span><p class="sub" style="margin-top:12px">Temel 120 ifade çevrimdışı kullanılabilir. Gelişmiş AI açıklaması için güvenli sunucu gerekir.</p></div>
+            </div>
+          </section>
+
+          <section id="mission" class="section">
+            <div class="card"><h3>Görev ve İletişim İfade Bankası</h3><p class="sub">Dil eğitimi ve güvenli iletişim pratiği için kategoriler.</p>
+              <div class="row" style="margin-bottom:14px"><select id="missionCategory" onchange="renderMission()" style="max-width:300px"><option value="checkpoint">Kontrol Noktası</option><option value="direction">Yönlendirme</option><option value="medical">Sağlık ve İlk Yardım</option><option value="evacuation">Tahliye ve Güvenlik</option><option value="civil">Sivil İletişim</option></select></div>
+              <div id="missionList" class="list"></div>
+            </div>
+          </section>
+
+          <section id="daily" class="section"><div class="card"><h3>Günlük Konuşma</h3><p class="sub">Selamlaşma, restoran, ulaşım, alışveriş ve iş hayatı.</p><div id="dailyList" class="list"></div></div></section>
+
+          <section id="lessons" class="section"><div class="grid" style="margin-top:0">
+            <div class="card span-4"><span class="badge">A1</span><h3>Temel Başlangıç</h3><p class="sub">Alfabe, sayılar, selamlaşma.</p><button class="btn primary">Derse Başla</button></div>
+            <div class="card span-4"><span class="badge">A2</span><h3>Günlük İletişim</h3><p class="sub">Yönler, ihtiyaçlar, basit sorular.</p><button class="btn">Devam Et</button></div>
+            <div class="card span-4"><span class="badge">B1</span><h3>Görev İletişimi</h3><p class="sub">Resmî ifadeler ve senaryolar.</p><button class="btn">Kilitli</button></div>
+          </div></section>
+
+          <section id="pronounce" class="section"><div class="grid" style="margin-top:0">
+            <div class="card span-7"><h3>Telaffuz Laboratuvarı</h3><div class="field"><label>ARAPÇA CÜMLE</label><input id="pronText" class="input" value="من فضلك انتظر هنا"></div><div id="pronPreview" class="arabic">من فضلك انتظر هنا</div><div class="translit">Min fadlik intazir hunā</div><div class="row" style="margin-top:13px"><button class="btn primary" onclick="speak(document.getElementById('pronText').value)">Dinle</button><button class="btn" onclick="startRecognition()">Mikrofonla Tekrarla</button></div><p id="recognitionOut" class="sub">Ses tanıma sonucu burada gösterilir.</p></div>
+            <div class="card span-5"><h3>Zor Sesler</h3><div class="list"><div class="item"><b>ع — Ayn</b><small style="display:block">Boğazın orta kısmından çıkar.</small></div><div class="item"><b>ح — Hâ</b><small style="display:block">Nefesli ve yumuşak h sesi.</small></div><div class="item"><b>ق — Kāf</b><small style="display:block">Dilin arkasından kalın k sesi.</small></div></div></div>
+          </div></section>
+
+          <section id="quiz" class="section"><div class="grid" style="margin-top:0"><div class="card span-8"><h3>Seviye Sınavı</h3><div id="quizBox"></div></div><div class="card span-4"><h3>Puan</h3><div class="metric"><span>Doğru</span><strong id="correctCount">0</strong></div><div class="metric" style="margin-top:9px"><span>Yanlış</span><strong id="wrongCount">0</strong></div><button class="btn primary full" style="margin-top:12px" onclick="newQuiz()">Yeni Soru</button></div></div></section>
+
+          <section id="favorites" class="section"><div class="card"><h3>Hızlı Komutlar</h3><p class="sub">Sık kullandığın ifadeler yalnızca bu cihazda saklanır.</p><div id="favoriteList" class="list"></div></div></section>
+
+          <section id="progress" class="section"><div class="grid" style="margin-top:0"><div class="card span-6"><h3>İlerleme Özeti</h3><div class="item"><b>Toplam kelime</b><small style="float:right">186</small></div><div class="item"><b>Tamamlanan senaryo</b><small style="float:right">12</small></div><div class="item"><b>Ortalama sınav</b><small style="float:right">%81</small></div></div><div class="card span-6"><h3>Öneri</h3><p class="sub">Levant günlük konuşma ve telaffuz çalışmasına ağırlık ver.</p><div class="progress"><i style="width:64%"></i></div></div></div></section>
+
+          <section id="settings" class="section"><div class="grid" style="margin-top:0"><div class="card span-6"><h3>Uygulama Ayarları</h3><div class="field"><label>VARSAYILAN LEHÇE</label><select><option>Modern Standart Arapça</option><option>Levant</option><option>Mısır</option><option>Körfez</option></select></div><div class="field"><label>SES HIZI</label><input type="range" min="50" max="120" value="82"></div><button class="btn" onclick="toggleTheme()">Tema Değiştir</button></div><div class="card span-6"><h3>Gizlilik ve Güvenlik</h3><p class="sub">Hassas bilgi, gerçek konum, personel kimliği veya gizli görev verisi bu açık demo içine yazılmamalıdır.</p><button class="btn danger" onclick="clearLocalData()">Yerel Verileri Temizle</button></div></div></section>
+
+          <div class="footer">Lisan AI v1.0 — Tek dosyalı ileri seviye prototip. Gerçek AI ve kurumsal kayıt sistemi için güvenli backend gerekir.</div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <div id="forgotModal" class="modal hidden"><div class="modal-card"><h3>Şifre Kurtarma</h3><p class="sub">Demo sürümünde kullanıcı adını yaz. Yerel kayıtta bulunursa yeni şifre belirleyebilirsin.</p><div class="field"><label>KULLANICI ADI</label><input id="forgotUser" class="input"></div><div class="field"><label>YENİ ŞİFRE</label><input id="forgotPass" type="password" class="input"></div><div class="row"><button class="btn primary" onclick="resetPassword()">Şifreyi Güncelle</button><button class="btn" onclick="closeForgot()">Kapat</button></div></div></div>
+  <div id="toast" class="toast"></div>
+
+<script>
+const phraseDB={
+  "lütfen kimliğinizi gösterin":{msa:["الرجاء إبراز هويتك","Ar-racā ibrāzu huwiyyatik","Resmî ve anlaşılır kullanım."],levant:["لو سمحت فرجيني هويتك","Law samaht farjīnī huwiyyetak","Levant günlük kullanımı."],egypt:["لو سمحت ورّيني بطاقتك","Law samaht warrīnī bitā’tak","Mısır günlük kullanımı."],gulf:["لو سمحت ورّني هويتك","Law samaht warrinī huwiyyatak","Körfez günlük kullanımı."]},
+  "burada bekleyin":{msa:["انتظر هنا من فضلك","Intazir hunā min fadlik","Nazik ve resmî."],levant:["استنى هون لو سمحت","Istanna hون law samaht","Levant."],egypt:["استنى هنا لو سمحت","Istanna hina law samaht","Mısır."],gulf:["انتظر هنا لو سمحت","Intazir hina law samaht","Körfez."]},
+  "yardıma ihtiyacınız var mı":{msa:["هل تحتاج إلى مساعدة؟","Hal tahtāju ilā musā‘ada?","Standart ve nazik."],levant:["بدك مساعدة؟","Baddak musā‘ade?","Levant."],egypt:["محتاج مساعدة؟","Mihtāg musā‘ada?","Mısır."],gulf:["تحتاج مساعدة؟","Tahtāj musā‘ada?","Körfez."]},
+  "bu bölgeye girmeyin":{msa:["لا تدخل هذه المنطقة","Lā tadkhul hādhihi al-mintaqa","Açık uyarı cümlesi."],levant:["ما تفوت ع هالمنطقة","Mā tfūt ‘a hal-minta’a","Levant."],egypt:["ما تدخلش المنطقة دي","Mā tidkhulsh il-minta’a di","Mısır."],gulf:["لا تدخل هالمنطقة","Lā tadkhul hal-mintaqa","Körfez."]},
+  "doktor çağırın":{msa:["اتصلوا بالطبيب","Ittasilū bit-tabīb","Acil sağlık iletişimi."],levant:["نادوا الدكتور","Nādū ad-duktūr","Levant."],egypt:["هاتوا الدكتور","Hātū ad-duktūr","Mısır."],gulf:["اتصلوا بالدكتور","Ittasilū bid-duktūr","Körfez."]},
+  "sakin olun":{msa:["ابقَ هادئاً","Ibqa hādi’an","Erkeğe hitap."],levant:["خليك هادي","Khallīk hādi","Levant."],egypt:["خليك هادي","Khallīk hādi","Mısır."],gulf:["خلك هادي","Khallik hādi","Körfez."]}
+};
+const missionDB={
+ checkpoint:[["Lütfen kimliğinizi gösterin.","الرجاء إبراز هويتك"],["Burada bekleyin.","انتظر هنا من فضلك"],["Araçtan inmeyin.","لا تنزل من المركبة"],["İleri devam edin.","تابع إلى الأمام"]],
+ direction:[["Sağa dönün.","انعطف يميناً"],["Sola dönün.","انعطف يساراً"],["Düz devam edin.","تابع مباشرة"],["Bu yolu kullanın.","استخدم هذا الطريق"]],
+ medical:[["Doktor çağırın.","اتصلوا بالطبيب"],["Yaralı var.","هناك مصاب"],["Sakin olun.","ابقَ هادئاً"],["Nerede ağrınız var?","أين تشعر بالألم؟"]],
+ evacuation:[["Bu bölgeden uzaklaşın.","ابتعدوا عن هذه المنطقة"],["Güvenli alana gidin.","اذهبوا إلى المنطقة الآمنة"],["Panik yapmayın.","لا داعي للذعر"],["Beni takip edin.","اتبعوني"]],
+ civil:[["Yardıma ihtiyacınız var mı?","هل تحتاج إلى مساعدة؟"],["Adınız nedir?","ما اسمك؟"],["Nerede oturuyorsunuz?","أين تسكن؟"],["Teşekkür ederim.","شكراً لك"]]
+};
+const daily=[["Merhaba","مرحباً"],["Nasılsınız?","كيف حالك؟"],["Teşekkür ederim","شكراً لك"],["Anlamadım","لم أفهم"],["Yavaş konuşur musunuz?","هل يمكنك التحدث ببطء؟"]];
+const quizData=[
+ {q:"“Burada bekleyin” hangisidir?",a:"انتظر هنا من فضلك",o:["اذهب إلى هناك","انتظر هنا من فضلك","تعال بسرعة","لا أعرف"]},
+ {q:"“Lütfen kimliğinizi gösterin” hangisidir?",a:"الرجاء إبراز هويتك",o:["أين الطريق؟","الرجاء إبراز هويتك","أنا بخير","شكراً"]},
+ {q:"“Doktor çağırın” hangisidir?",a:"اتصلوا بالطبيب",o:["اتصلوا بالطبيب","افتح الباب","اجلس هنا","انتظر قليلاً"]}
+];
+let favorites=JSON.parse(localStorage.getItem("lisanFavorites")||"[]"),correct=0,wrong=0;
+
+function showAuth(type){
+  loginTab.classList.toggle("active",type==="login");registerTab.classList.toggle("active",type==="register");
+  loginForm.classList.toggle("hidden",type!=="login");registerForm.classList.toggle("hidden",type!=="register");
+}
+function getUsers(){return JSON.parse(localStorage.getItem("lisanUsers")||"{}")}
+function setUsers(u){localStorage.setItem("lisanUsers",JSON.stringify(u))}
+function register(e){
+  e.preventDefault();const users=getUsers(),u=regUser.value.trim();
+  if(users[u])return toast("Bu kullanıcı adı mevcut.");
+  users[u]={name:regName.value.trim(),pass:regPass.value,role:regRole.value};setUsers(users);toast("Hesap oluşturuldu.");showAuth("login");loginUser.value=u;
+}
+function login(e){
+  e.preventDefault();const users=getUsers(),u=loginUser.value.trim(),p=loginPass.value;
+  const demo=u==="personel"&&p==="1234";
+  if(!demo && (!users[u]||users[u].pass!==p))return toast("Kullanıcı adı veya şifre yanlış.");
+  const data=demo?{name:"Demo Personel",role:"Öğrenci Personel"}:users[u];
+  currentUserName.textContent=data.name;currentUserRole.textContent=data.role;
+  authScreen.classList.add("hidden");appScreen.classList.remove("hidden");
+  if(rememberMe.checked)localStorage.setItem("lisanSession",JSON.stringify({u,name:data.name,role:data.role}));
+}
+function logout(){localStorage.removeItem("lisanSession");location.reload()}
+function openForgot(){forgotModal.classList.remove("hidden")}function closeForgot(){forgotModal.classList.add("hidden")}
+function resetPassword(){const users=getUsers(),u=forgotUser.value.trim();if(!users[u])return toast("Kullanıcı bulunamadı.");users[u].pass=forgotPass.value;setUsers(users);closeForgot();toast("Şifre güncellendi.")}
+function goSection(id){document.querySelectorAll(".section").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.section===id))}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>goSection(b.dataset.section));
+function norm(s){return s.toLocaleLowerCase("tr-TR").trim().replace(/[?!.,]/g,"")}
+function translateNow(){
+ const t=norm(translateInput.value),d=dialectSelect.value;let found=phraseDB[t];
+ if(!found){for(const k in phraseDB)if(t.includes(k)){found=phraseDB[k];break}}
+ const r=found?found[d]:["هذه ترجمة تجريبية للنص المكتوب","Hādhihi tarjama tajrībiyya","Demo çeviri. Gerçek AI için güvenli sunucu bağlantısı gerekir."];
+ arabicOut.textContent=r[0];translitOut.textContent=r[1];meaningOut.textContent=translateInput.value||"Türkçe anlam";noteOut.textContent=r[2];
+}
+function speak(text){if(!("speechSynthesis"in window))return toast("Sesli okuma desteklenmiyor.");speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="ar-SA";u.rate=.82;speechSynthesis.speak(u)}
+function saveCommand(){const x={tr:meaningOut.textContent,ar:arabicOut.textContent};if(favorites.some(f=>f.ar===x.ar))return toast("Zaten kayıtlı.");favorites.push(x);localStorage.setItem("lisanFavorites",JSON.stringify(favorites));renderFavorites();toast("Hızlı komutlara eklendi.")}
+function renderFavorites(){favoriteList.innerHTML=favorites.length?favorites.map((x,i)=>`<div class="phrase"><div><b>${x.tr}</b></div><div class="ar">${x.ar}</div><button class="btn danger" onclick="removeFav(${i})">Sil</button></div>`).join(""):'<div class="sub">Henüz kayıtlı hızlı komut yok.</div>'}
+function removeFav(i){favorites.splice(i,1);localStorage.setItem("lisanFavorites",JSON.stringify(favorites));renderFavorites()}
+function renderMission(){missionList.innerHTML=missionDB[missionCategory.value].map(x=>`<div class="phrase"><div><b>${x[0]}</b></div><div class="ar">${x[1]}</div><button class="btn" onclick="speak('${x[1]}')">🔊</button></div>`).join("")}
+function renderDaily(){dailyList.innerHTML=daily.map(x=>`<div class="phrase"><div><b>${x[0]}</b></div><div class="ar">${x[1]}</div><button class="btn" onclick="speak('${x[1]}')">🔊</button></div>`).join("")}
+function renderQuick(){quickChips.innerHTML=Object.keys(phraseDB).map(k=>`<button class="chip" onclick="translateInput.value='${k}';translateNow()">${k}</button>`).join("")}
+pronText.oninput=e=>pronPreview.textContent=e.target.value;
+function startRecognition(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return toast("Ses tanıma desteklenmiyor.");const r=new SR();r.lang="ar-SA";recognitionOut.textContent="Dinleniyor...";r.onresult=e=>recognitionOut.textContent="Algılanan: "+e.results[0][0].transcript;r.onerror=()=>recognitionOut.textContent="Ses algılanamadı.";r.start()}
+function newQuiz(){const q=quizData[Math.floor(Math.random()*quizData.length)];quizBox.innerHTML=`<h4>${q.q}</h4>${q.o.map(o=>`<button class="quiz-option" onclick="answerQuiz(this,'${o}','${q.a}')">${o}</button>`).join("")}`}
+function answerQuiz(btn,c,a){document.querySelectorAll(".quiz-option").forEach(b=>b.disabled=true);if(c===a){btn.classList.add("correct");correct++}else{btn.classList.add("wrong");wrong++;document.querySelectorAll(".quiz-option").forEach(b=>{if(b.textContent===a)b.classList.add("correct")})}correctCount.textContent=correct;wrongCount.textContent=wrong}
+function toggleTheme(){document.body.classList.toggle("light")}
+function clearLocalData(){if(confirm("Yerel kullanıcılar, hızlı komutlar ve oturum bilgileri silinsin mi?")){localStorage.clear();location.reload()}}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";clearTimeout(window._t);window._t=setTimeout(()=>t.style.display="none",2200)}
+renderMission();renderDaily();renderQuick();renderFavorites();newQuiz();
+const s=JSON.parse(localStorage.getItem("lisanSession")||"null");if(s){currentUserName.textContent=s.name;currentUserRole.textContent=s.role;authScreen.classList.add("hidden");appScreen.classList.remove("hidden")}
+</script>
+</body>
+</html>
