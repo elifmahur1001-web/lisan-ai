@@ -1,0 +1,9 @@
+{
+  "name": "Lisan AI v4",
+  "short_name": "Lisan AI",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#07110d",
+  "theme_color": "#07110d",
+  "icons": []
+}

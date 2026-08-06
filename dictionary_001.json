@@ -1,0 +1,29 @@
+[
+  {
+    "id": "word_00001",
+    "arabic": "كتاب",
+    "turkish": "kitap",
+    "latin": "kitāb",
+    "type": "isim",
+    "category": "eğitim",
+    "dialect": "msa"
+  },
+  {
+    "id": "word_00002",
+    "arabic": "ماء",
+    "turkish": "su",
+    "latin": "māʾ",
+    "type": "isim",
+    "category": "yiyecek-içecek",
+    "dialect": "msa"
+  },
+  {
+    "id": "word_00003",
+    "arabic": "طبيب",
+    "turkish": "doktor",
+    "latin": "ṭabīb",
+    "type": "isim",
+    "category": "sağlık",
+    "dialect": "msa"
+  }
+]
