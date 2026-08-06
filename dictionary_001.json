@@ -1,29 +1,702 @@
 [
   {
-    "id": "word_00001",
     "arabic": "كتاب",
     "turkish": "kitap",
     "latin": "kitāb",
     "type": "isim",
-    "category": "eğitim",
-    "dialect": "msa"
+    "category": "eğitim"
   },
   {
-    "id": "word_00002",
+    "arabic": "قلم",
+    "turkish": "kalem",
+    "latin": "qalam",
+    "type": "isim",
+    "category": "eğitim"
+  },
+  {
+    "arabic": "دفتر",
+    "turkish": "defter",
+    "latin": "daftar",
+    "type": "isim",
+    "category": "eğitim"
+  },
+  {
+    "arabic": "مدرسة",
+    "turkish": "okul",
+    "latin": "madrasa",
+    "type": "isim",
+    "category": "eğitim"
+  },
+  {
+    "arabic": "جامعة",
+    "turkish": "üniversite",
+    "latin": "jāmiʿa",
+    "type": "isim",
+    "category": "eğitim"
+  },
+  {
+    "arabic": "طالب",
+    "turkish": "erkek öğrenci",
+    "latin": "ṭālib",
+    "type": "isim",
+    "category": "eğitim"
+  },
+  {
+    "arabic": "طالبة",
+    "turkish": "kadın öğrenci",
+    "latin": "ṭāliba",
+    "type": "isim",
+    "category": "eğitim"
+  },
+  {
+    "arabic": "معلّم",
+    "turkish": "erkek öğretmen",
+    "latin": "muʿallim",
+    "type": "isim",
+    "category": "eğitim"
+  },
+  {
+    "arabic": "معلّمة",
+    "turkish": "kadın öğretmen",
+    "latin": "muʿallima",
+    "type": "isim",
+    "category": "eğitim"
+  },
+  {
+    "arabic": "درس",
+    "turkish": "ders",
+    "latin": "dars",
+    "type": "isim",
+    "category": "eğitim"
+  },
+  {
+    "arabic": "بيت",
+    "turkish": "ev",
+    "latin": "bayt",
+    "type": "isim",
+    "category": "ev"
+  },
+  {
+    "arabic": "غرفة",
+    "turkish": "oda",
+    "latin": "ghurfa",
+    "type": "isim",
+    "category": "ev"
+  },
+  {
+    "arabic": "باب",
+    "turkish": "kapı",
+    "latin": "bāb",
+    "type": "isim",
+    "category": "ev"
+  },
+  {
+    "arabic": "نافذة",
+    "turkish": "pencere",
+    "latin": "nāfidha",
+    "type": "isim",
+    "category": "ev"
+  },
+  {
+    "arabic": "مطبخ",
+    "turkish": "mutfak",
+    "latin": "maṭbakh",
+    "type": "isim",
+    "category": "ev"
+  },
+  {
+    "arabic": "حمّام",
+    "turkish": "banyo",
+    "latin": "ḥammām",
+    "type": "isim",
+    "category": "ev"
+  },
+  {
+    "arabic": "كرسي",
+    "turkish": "sandalye",
+    "latin": "kursī",
+    "type": "isim",
+    "category": "ev"
+  },
+  {
+    "arabic": "طاولة",
+    "turkish": "masa",
+    "latin": "ṭāwila",
+    "type": "isim",
+    "category": "ev"
+  },
+  {
+    "arabic": "سرير",
+    "turkish": "yatak",
+    "latin": "sarīr",
+    "type": "isim",
+    "category": "ev"
+  },
+  {
+    "arabic": "مفتاح",
+    "turkish": "anahtar",
+    "latin": "miftāḥ",
+    "type": "isim",
+    "category": "ev"
+  },
+  {
     "arabic": "ماء",
     "turkish": "su",
     "latin": "māʾ",
     "type": "isim",
-    "category": "yiyecek-içecek",
-    "dialect": "msa"
+    "category": "yiyecek-içecek"
   },
   {
-    "id": "word_00003",
+    "arabic": "خبز",
+    "turkish": "ekmek",
+    "latin": "khubz",
+    "type": "isim",
+    "category": "yiyecek-içecek"
+  },
+  {
+    "arabic": "حليب",
+    "turkish": "süt",
+    "latin": "ḥalīb",
+    "type": "isim",
+    "category": "yiyecek-içecek"
+  },
+  {
+    "arabic": "شاي",
+    "turkish": "çay",
+    "latin": "shāy",
+    "type": "isim",
+    "category": "yiyecek-içecek"
+  },
+  {
+    "arabic": "قهوة",
+    "turkish": "kahve",
+    "latin": "qahwa",
+    "type": "isim",
+    "category": "yiyecek-içecek"
+  },
+  {
+    "arabic": "طعام",
+    "turkish": "yemek",
+    "latin": "ṭaʿām",
+    "type": "isim",
+    "category": "yiyecek-içecek"
+  },
+  {
+    "arabic": "لحم",
+    "turkish": "et",
+    "latin": "laḥm",
+    "type": "isim",
+    "category": "yiyecek-içecek"
+  },
+  {
+    "arabic": "دجاج",
+    "turkish": "tavuk",
+    "latin": "dajāj",
+    "type": "isim",
+    "category": "yiyecek-içecek"
+  },
+  {
+    "arabic": "سمك",
+    "turkish": "balık",
+    "latin": "samak",
+    "type": "isim",
+    "category": "yiyecek-içecek"
+  },
+  {
+    "arabic": "أرز",
+    "turkish": "pirinç",
+    "latin": "aruzz",
+    "type": "isim",
+    "category": "yiyecek-içecek"
+  },
+  {
+    "arabic": "تفاح",
+    "turkish": "elma",
+    "latin": "tuffāḥ",
+    "type": "isim",
+    "category": "meyve-sebze"
+  },
+  {
+    "arabic": "موز",
+    "turkish": "muz",
+    "latin": "mawz",
+    "type": "isim",
+    "category": "meyve-sebze"
+  },
+  {
+    "arabic": "برتقال",
+    "turkish": "portakal",
+    "latin": "burtuqāl",
+    "type": "isim",
+    "category": "meyve-sebze"
+  },
+  {
+    "arabic": "عنب",
+    "turkish": "üzüm",
+    "latin": "ʿinab",
+    "type": "isim",
+    "category": "meyve-sebze"
+  },
+  {
+    "arabic": "تمر",
+    "turkish": "hurma",
+    "latin": "tamr",
+    "type": "isim",
+    "category": "meyve-sebze"
+  },
+  {
+    "arabic": "طماطم",
+    "turkish": "domates",
+    "latin": "ṭamāṭim",
+    "type": "isim",
+    "category": "meyve-sebze"
+  },
+  {
+    "arabic": "بطاطا",
+    "turkish": "patates",
+    "latin": "baṭāṭā",
+    "type": "isim",
+    "category": "meyve-sebze"
+  },
+  {
+    "arabic": "بصل",
+    "turkish": "soğan",
+    "latin": "baṣal",
+    "type": "isim",
+    "category": "meyve-sebze"
+  },
+  {
+    "arabic": "خيار",
+    "turkish": "salatalık",
+    "latin": "khiyār",
+    "type": "isim",
+    "category": "meyve-sebze"
+  },
+  {
+    "arabic": "ملح",
+    "turkish": "tuz",
+    "latin": "milḥ",
+    "type": "isim",
+    "category": "yiyecek-içecek"
+  },
+  {
+    "arabic": "أب",
+    "turkish": "baba",
+    "latin": "ab",
+    "type": "isim",
+    "category": "aile"
+  },
+  {
+    "arabic": "أم",
+    "turkish": "anne",
+    "latin": "umm",
+    "type": "isim",
+    "category": "aile"
+  },
+  {
+    "arabic": "أخ",
+    "turkish": "erkek kardeş",
+    "latin": "akh",
+    "type": "isim",
+    "category": "aile"
+  },
+  {
+    "arabic": "أخت",
+    "turkish": "kız kardeş",
+    "latin": "ukht",
+    "type": "isim",
+    "category": "aile"
+  },
+  {
+    "arabic": "ابن",
+    "turkish": "oğul",
+    "latin": "ibn",
+    "type": "isim",
+    "category": "aile"
+  },
+  {
+    "arabic": "ابنة",
+    "turkish": "kız evlat",
+    "latin": "ibna",
+    "type": "isim",
+    "category": "aile"
+  },
+  {
+    "arabic": "جد",
+    "turkish": "dede",
+    "latin": "jadd",
+    "type": "isim",
+    "category": "aile"
+  },
+  {
+    "arabic": "جدة",
+    "turkish": "nine",
+    "latin": "jadda",
+    "type": "isim",
+    "category": "aile"
+  },
+  {
+    "arabic": "عائلة",
+    "turkish": "aile",
+    "latin": "ʿāʾila",
+    "type": "isim",
+    "category": "aile"
+  },
+  {
+    "arabic": "طفل",
+    "turkish": "çocuk",
+    "latin": "ṭifl",
+    "type": "isim",
+    "category": "aile"
+  },
+  {
+    "arabic": "مدينة",
+    "turkish": "şehir",
+    "latin": "madīna",
+    "type": "isim",
+    "category": "yer"
+  },
+  {
+    "arabic": "قرية",
+    "turkish": "köy",
+    "latin": "qarya",
+    "type": "isim",
+    "category": "yer"
+  },
+  {
+    "arabic": "شارع",
+    "turkish": "sokak",
+    "latin": "shāriʿ",
+    "type": "isim",
+    "category": "yer"
+  },
+  {
+    "arabic": "طريق",
+    "turkish": "yol",
+    "latin": "ṭarīq",
+    "type": "isim",
+    "category": "yer"
+  },
+  {
+    "arabic": "سوق",
+    "turkish": "pazar",
+    "latin": "sūq",
+    "type": "isim",
+    "category": "yer"
+  },
+  {
+    "arabic": "مسجد",
+    "turkish": "cami",
+    "latin": "masjid",
+    "type": "isim",
+    "category": "yer"
+  },
+  {
+    "arabic": "مستشفى",
+    "turkish": "hastane",
+    "latin": "mustashfā",
+    "type": "isim",
+    "category": "yer"
+  },
+  {
+    "arabic": "صيدلية",
+    "turkish": "eczane",
+    "latin": "ṣaydaliyya",
+    "type": "isim",
+    "category": "yer"
+  },
+  {
+    "arabic": "مطار",
+    "turkish": "havaalanı",
+    "latin": "maṭār",
+    "type": "isim",
+    "category": "yer"
+  },
+  {
+    "arabic": "محطة",
+    "turkish": "istasyon",
+    "latin": "maḥaṭṭa",
+    "type": "isim",
+    "category": "yer"
+  },
+  {
+    "arabic": "سيارة",
+    "turkish": "araba",
+    "latin": "sayyāra",
+    "type": "isim",
+    "category": "ulaşım"
+  },
+  {
+    "arabic": "حافلة",
+    "turkish": "otobüs",
+    "latin": "ḥāfila",
+    "type": "isim",
+    "category": "ulaşım"
+  },
+  {
+    "arabic": "قطار",
+    "turkish": "tren",
+    "latin": "qiṭār",
+    "type": "isim",
+    "category": "ulaşım"
+  },
+  {
+    "arabic": "طائرة",
+    "turkish": "uçak",
+    "latin": "ṭāʾira",
+    "type": "isim",
+    "category": "ulaşım"
+  },
+  {
+    "arabic": "سفينة",
+    "turkish": "gemi",
+    "latin": "safīna",
+    "type": "isim",
+    "category": "ulaşım"
+  },
+  {
+    "arabic": "دراجة",
+    "turkish": "bisiklet",
+    "latin": "darrāja",
+    "type": "isim",
+    "category": "ulaşım"
+  },
+  {
+    "arabic": "سائق",
+    "turkish": "şoför",
+    "latin": "sāʾiq",
+    "type": "isim",
+    "category": "ulaşım"
+  },
+  {
+    "arabic": "تذكرة",
+    "turkish": "bilet",
+    "latin": "tadhkira",
+    "type": "isim",
+    "category": "ulaşım"
+  },
+  {
+    "arabic": "جواز سفر",
+    "turkish": "pasaport",
+    "latin": "jawāz safar",
+    "type": "isim",
+    "category": "ulaşım"
+  },
+  {
+    "arabic": "حقيبة",
+    "turkish": "çanta",
+    "latin": "ḥaqība",
+    "type": "isim",
+    "category": "ulaşım"
+  },
+  {
     "arabic": "طبيب",
     "turkish": "doktor",
     "latin": "ṭabīb",
     "type": "isim",
-    "category": "sağlık",
-    "dialect": "msa"
+    "category": "sağlık"
+  },
+  {
+    "arabic": "ممرّض",
+    "turkish": "erkek hemşire",
+    "latin": "mumarriḍ",
+    "type": "isim",
+    "category": "sağlık"
+  },
+  {
+    "arabic": "ممرّضة",
+    "turkish": "kadın hemşire",
+    "latin": "mumarriḍa",
+    "type": "isim",
+    "category": "sağlık"
+  },
+  {
+    "arabic": "دواء",
+    "turkish": "ilaç",
+    "latin": "dawāʾ",
+    "type": "isim",
+    "category": "sağlık"
+  },
+  {
+    "arabic": "ألم",
+    "turkish": "ağrı",
+    "latin": "alam",
+    "type": "isim",
+    "category": "sağlık"
+  },
+  {
+    "arabic": "رأس",
+    "turkish": "baş",
+    "latin": "raʾs",
+    "type": "isim",
+    "category": "vücut"
+  },
+  {
+    "arabic": "عين",
+    "turkish": "göz",
+    "latin": "ʿayn",
+    "type": "isim",
+    "category": "vücut"
+  },
+  {
+    "arabic": "يد",
+    "turkish": "el",
+    "latin": "yad",
+    "type": "isim",
+    "category": "vücut"
+  },
+  {
+    "arabic": "قدم",
+    "turkish": "ayak",
+    "latin": "qadam",
+    "type": "isim",
+    "category": "vücut"
+  },
+  {
+    "arabic": "قلب",
+    "turkish": "kalp",
+    "latin": "qalb",
+    "type": "isim",
+    "category": "vücut"
+  },
+  {
+    "arabic": "شرطة",
+    "turkish": "polis",
+    "latin": "shurṭa",
+    "type": "isim",
+    "category": "kurum"
+  },
+  {
+    "arabic": "جندي",
+    "turkish": "asker",
+    "latin": "jundī",
+    "type": "isim",
+    "category": "meslek"
+  },
+  {
+    "arabic": "ضابط",
+    "turkish": "subay",
+    "latin": "ḍābiṭ",
+    "type": "isim",
+    "category": "meslek"
+  },
+  {
+    "arabic": "مركز",
+    "turkish": "merkez",
+    "latin": "markaz",
+    "type": "isim",
+    "category": "yer"
+  },
+  {
+    "arabic": "خريطة",
+    "turkish": "harita",
+    "latin": "kharīṭa",
+    "type": "isim",
+    "category": "araç"
+  },
+  {
+    "arabic": "اتصال",
+    "turkish": "iletişim",
+    "latin": "ittiṣāl",
+    "type": "isim",
+    "category": "iletişim"
+  },
+  {
+    "arabic": "رسالة",
+    "turkish": "mesaj",
+    "latin": "risāla",
+    "type": "isim",
+    "category": "iletişim"
+  },
+  {
+    "arabic": "هاتف",
+    "turkish": "telefon",
+    "latin": "hātif",
+    "type": "isim",
+    "category": "iletişim"
+  },
+  {
+    "arabic": "رقم",
+    "turkish": "numara",
+    "latin": "raqm",
+    "type": "isim",
+    "category": "iletişim"
+  },
+  {
+    "arabic": "اسم",
+    "turkish": "isim",
+    "latin": "ism",
+    "type": "isim",
+    "category": "temel"
+  },
+  {
+    "arabic": "كبير",
+    "turkish": "büyük",
+    "latin": "kabīr",
+    "type": "sıfat",
+    "category": "sıfat"
+  },
+  {
+    "arabic": "صغير",
+    "turkish": "küçük",
+    "latin": "ṣaghīr",
+    "type": "sıfat",
+    "category": "sıfat"
+  },
+  {
+    "arabic": "جديد",
+    "turkish": "yeni",
+    "latin": "jadīd",
+    "type": "sıfat",
+    "category": "sıfat"
+  },
+  {
+    "arabic": "قديم",
+    "turkish": "eski",
+    "latin": "qadīm",
+    "type": "sıfat",
+    "category": "sıfat"
+  },
+  {
+    "arabic": "سريع",
+    "turkish": "hızlı",
+    "latin": "sarīʿ",
+    "type": "sıfat",
+    "category": "sıfat"
+  },
+  {
+    "arabic": "بطيء",
+    "turkish": "yavaş",
+    "latin": "baṭīʾ",
+    "type": "sıfat",
+    "category": "sıfat"
+  },
+  {
+    "arabic": "قريب",
+    "turkish": "yakın",
+    "latin": "qarīb",
+    "type": "sıfat",
+    "category": "sıfat"
+  },
+  {
+    "arabic": "بعيد",
+    "turkish": "uzak",
+    "latin": "baʿīd",
+    "type": "sıfat",
+    "category": "sıfat"
+  },
+  {
+    "arabic": "سهل",
+    "turkish": "kolay",
+    "latin": "sahl",
+    "type": "sıfat",
+    "category": "sıfat"
+  },
+  {
+    "arabic": "صعب",
+    "turkish": "zor",
+    "latin": "ṣaʿb",
+    "type": "sıfat",
+    "category": "sıfat"
   }
 ]
